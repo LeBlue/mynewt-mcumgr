@@ -292,7 +292,10 @@ img_mgmt_erase(struct mgmt_ctxt *ctxt)
         /* No free slot. */
         return MGMT_ERR_EBADSTATE;
     }
-    
+
+    /* clear upload state, that we do not resume on erased slot */
+    memset(&g_img_mgmt_state, 0, sizeof(g_img_mgmt_state));
+
     rc = img_mgmt_impl_erase_slot();
 
     err = 0;
